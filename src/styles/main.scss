@@ -1,2 +1,10 @@
 // base
-@import 'base/reset';
+@use 'base/variables';
+@use 'base/fonts';
+@use 'base/reset';
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+}

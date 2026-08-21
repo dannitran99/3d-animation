@@ -1,0 +1,24 @@
+/* Khai báo font Pretendard (self-hosted) từ src/assets/fonts */
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../../assets/fonts/pretendard-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../../assets/fonts/pretendard-medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../../assets/fonts/pretendard-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

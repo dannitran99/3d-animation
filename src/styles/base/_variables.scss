@@ -1,0 +1,27 @@
+/* Bảng màu tone lạnh (cool tone) - dùng chung toàn app qua CSS custom properties */
+:root {
+  // Nền
+  --color-bg: #f4f7fb;
+  --color-surface: #ffffff;
+
+  // Thương hiệu / nhấn
+  --color-primary: #3b6ea5;
+  --color-primary-dark: #274b73;
+  --color-accent: #5eb1bf;
+
+  // Chữ
+  --color-text: #1e2a38;
+  --color-text-muted: #64748b;
+  --color-text-inverse: #f4f7fb;
+
+  // Đường viền / phân tách
+  --color-border: #d9e2ec;
+
+  // Bố cục
+  --header-height: 64px;
+  --footer-height: 56px;
+  --radius-md: 8px;
+
+  // Font
+  --font-family-base: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
