@@ -3,8 +3,10 @@
 @use 'base/fonts';
 @use 'base/reset';
 
-body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-family-base);
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-family-base);
+  }
 }
