@@ -7,6 +7,7 @@ import { useThreeDLoadingContext } from '../../providers/ThreeDLoadingProvider';
 import { useThreeDToolsContext } from '../../providers/ThreeDToolsProvider';
 import { useModelAnimation } from '../../hooks/useModelAnimation';
 import { toggleModelShadow } from '../../utils/toggleModelShadow';
+import { ModelShadow } from './ModelShadow';
 
 type TModelProps = Readonly<{
   model: Group;
@@ -49,5 +50,10 @@ export const Model = ({ model }: TModelProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scaleVector, positionVector]);
 
-  return <Primitive object={model} scale={scaleVector} position={positionVector} />;
+  return (
+    <>
+      <Primitive object={model} scale={scaleVector} position={positionVector} />
+      {!isWireFrameOn && <ModelShadow position={groundPositionVector} />}
+    </>
+  );
 };

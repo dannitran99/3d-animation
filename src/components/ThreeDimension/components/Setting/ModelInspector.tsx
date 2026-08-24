@@ -3,6 +3,7 @@ import './ModelInspector.scss';
 
 import { clsx } from 'clsx';
 import { BackgroundSetting } from './BackgroundSetting';
+import { ShadowSetting } from './ShadowSetting';
 
 type TModelInspectorProps = Readonly<{
   isOpened: boolean;
@@ -42,7 +43,7 @@ export function ModelInspector({ isOpened }: TModelInspectorProps) {
         </div>
         <div className="feature">
           <span className="text-muted feature__title">Shadow Helper</span>
-          {/* <ModelShadowHelper /> */}
+          <InspectorMainSection title="Model Shadow" action={<ShadowSetting />} />
         </div>
         {/* <BoneHelper /> */}
         <div className="feature">
