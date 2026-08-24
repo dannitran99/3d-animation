@@ -8,11 +8,9 @@
       "@layouts": ["./src/layouts"],
       "@layouts/*": ["./src/layouts/*"],
       "@pages": ["./src/pages"],
-      "@pages/*": ["./src/pages/*"]
+      "@pages/*": ["./src/pages/*"],
+      "@assets/*": ["./src/assets/*"]
     }
   },
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
 }

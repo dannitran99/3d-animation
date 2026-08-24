@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { MainLayout } from '@layouts';
-import { HomePage, NotFoundPage } from '@pages';
+import { Exe, HomePage, NotFoundPage } from '@pages';
 
 const routes = createBrowserRouter([
   {
@@ -12,6 +12,10 @@ const routes = createBrowserRouter([
       {
         index: true, // Route mặc định của cha ('/')
         element: <HomePage />
+      },
+      {
+        path: '/exe',
+        element: <Exe />
       }
       // Thêm các route khác ở đây
     ]
