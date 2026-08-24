@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { Box3, Vector3 } from 'three';
 import * as THREE from 'three';
 import {
@@ -12,12 +12,25 @@ type TUseModelScaleProps = {
   meshes: Array<THREE.Mesh>;
 };
 
-export function useModelDefaultAttributes({ meshes }: TUseModelScaleProps) {
-  const [scaleVector, setScaleVector] = useState<Vector3 | undefined>(undefined);
-  const [positionVector, setPositionVector] = useState<Vector3 | undefined>(undefined);
-  const [groundPositionVector, setGroundPositionVector] = useState<Vector3 | undefined>(undefined);
+type TModelDefaultAttributes = {
+  scaleVector?: Vector3;
+  positionVector?: Vector3;
+  groundPositionVector?: Vector3;
+};
 
-  useEffect(() => {
+const modelDefaultAttributesCache = new Map<string, TModelDefaultAttributes>();
+
+export function useModelDefaultAttributes({
+  meshes
+}: TUseModelScaleProps): TModelDefaultAttributes {
+  return useMemo(() => {
+    const cacheKey = meshes.map((mesh) => mesh.uuid).join('|');
+
+    if (!cacheKey) return {};
+
+    const cachedAttributes = modelDefaultAttributesCache.get(cacheKey);
+    if (cachedAttributes) return cachedAttributes;
+
     const meshMinYValues: Array<number> = [];
     const meshMaxYValues: Array<number> = [];
     const meshMinXValues: Array<number> = [];
@@ -50,6 +63,8 @@ export function useModelDefaultAttributes({ meshes }: TUseModelScaleProps) {
       }
     });
 
+    if (!meshMinYValues.length) return {};
+
     const maxLengthOnX = Math.abs(Math.max(...meshMaxXValues) - Math.min(...meshMinXValues));
     const maxLengthOnY = Math.abs(Math.max(...meshMaxYValues) - Math.min(...meshMinYValues));
     const maxLengthOnZ = Math.abs(Math.max(...meshMaxZValues) - Math.min(...meshMinZValues));
@@ -61,8 +76,9 @@ export function useModelDefaultAttributes({ meshes }: TUseModelScaleProps) {
         ? MODEL_MAX_WIDTH_LENGTH / maxLengthOnWidth
         : MODEL_MAX_HEIGHT_LENGTH / maxLengthOnHeight;
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setScaleVector(new Vector3(scaleRatio, scaleRatio, scaleRatio));
+    if (!Number.isFinite(scaleRatio)) return {};
+
+    const scaleVector = new Vector3(scaleRatio, scaleRatio, scaleRatio);
 
     const modelCenterPositionOnYAxis =
       ((Math.max(...meshMaxYValues) + Math.min(...meshMinYValues)) / 2) * scaleRatio;
@@ -81,17 +97,18 @@ export function useModelDefaultAttributes({ meshes }: TUseModelScaleProps) {
 
     const groundPositionOnYAxis = Math.min(...meshMinYValues) * scaleRatio + modelPositionOnYAxis;
 
-    setPositionVector(
-      new Vector3(modelPositionOnXAxis, modelPositionOnYAxis, modelPositionOnZAxis)
-    );
-    setGroundPositionVector(
-      new Vector3(0, groundPositionOnYAxis - GROUND_ANTI_Z_COLLISION_DISTANCE, 0)
-    );
-  }, [meshes]);
+    const modelDefaultAttributes = {
+      scaleVector,
+      positionVector: new Vector3(modelPositionOnXAxis, modelPositionOnYAxis, modelPositionOnZAxis),
+      groundPositionVector: new Vector3(
+        0,
+        groundPositionOnYAxis - GROUND_ANTI_Z_COLLISION_DISTANCE,
+        0
+      )
+    };
 
-  return {
-    scaleVector,
-    positionVector,
-    groundPositionVector
-  };
+    modelDefaultAttributesCache.set(cacheKey, modelDefaultAttributes);
+
+    return modelDefaultAttributes;
+  }, [meshes]);
 }

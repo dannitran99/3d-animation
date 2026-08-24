@@ -7,6 +7,7 @@ import { useThreeDLoadingContext } from '../../providers/ThreeDLoadingProvider';
 import { useThreeDToolsContext } from '../../providers/ThreeDToolsProvider';
 import { useModelAnimation } from '../../hooks/useModelAnimation';
 import { toggleModelShadow } from '../../utils/toggleModelShadow';
+import { ModelShadow } from './ModelShadow';
 
 type TModelProps = Readonly<{
   model: Group;
@@ -14,6 +15,11 @@ type TModelProps = Readonly<{
 
 export const Model = ({ model }: TModelProps) => {
   const meshes = useMemo(() => {
+    model.position.set(0, 0, 0);
+    model.rotation.set(0, 0, 0);
+    model.scale.set(1, 1, 1);
+    model.updateMatrixWorld(true);
+
     // recalculate meshes of object when object change
     const meshes = getMeshesFromObject3d(model);
     // force each mesh to be updated the matrix by three
@@ -38,10 +44,16 @@ export const Model = ({ model }: TModelProps) => {
   });
 
   useEffect(() => {
-    if (typeof scaleVector !== 'undefined' && typeof positionVector !== 'undefined')
+    if (typeof scaleVector !== 'undefined' && typeof positionVector !== 'undefined') {
       updateHasModelRendered(true);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scaleVector, positionVector]);
 
-  return <Primitive object={model} scale={scaleVector} position={positionVector} />;
+  return (
+    <>
+      <Primitive object={model} scale={scaleVector} position={positionVector} />
+      {!isWireFrameOn && <ModelShadow position={groundPositionVector} />}
+    </>
+  );
 };

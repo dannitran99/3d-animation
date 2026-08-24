@@ -1,0 +1,7 @@
+.toggle-button {
+  padding: 2px 8px;
+
+  &-state--disabled {
+    filter: grayscale(50%);
+  }
+}
