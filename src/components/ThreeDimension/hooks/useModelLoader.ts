@@ -1,6 +1,7 @@
-import { useThreeDToolsContext } from '@/components/ThreeDimension/ThreeDToolsProvider';
+import { useThreeDToolsContext } from '@/components/ThreeDimension/providers/ThreeDToolsProvider';
 import { useLoader } from '@react-three/fiber';
 import { useEffect } from 'react';
+import type { Group } from 'three';
 import * as THREE from 'three';
 import { type GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
@@ -11,11 +12,7 @@ type TUseModelLoaderProps = {
 };
 
 type TUseModelLoaderReturn = {
-  model:
-    | THREE.Group
-    | THREE.Object3D<THREE.Object3DEventMap>
-    | THREE.AnimationObjectGroup
-    | undefined;
+  model: Group | THREE.Object3D<THREE.Object3DEventMap> | THREE.AnimationObjectGroup | undefined;
 };
 
 export const useModelLoader = ({
