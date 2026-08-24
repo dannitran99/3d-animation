@@ -1,9 +1,5 @@
 import { Color } from 'three';
-
-type TColorPicker = {
-  value: string;
-  hexCode: string;
-};
+import type { TColorPicker } from '../type';
 
 export const WIRE_FRAME_COLOR_PICKER: Array<TColorPicker> = [
   {

@@ -1,7 +1,6 @@
 import { useModelLoader } from '../../hooks/useModelLoader';
 import { useThreeDLoadingContext } from '../../providers/ThreeDLoadingProvider';
 import { Model } from '../Model';
-import { useEffect } from 'react';
 import type { Group } from 'three';
 
 type TThreeDModelProps = {
@@ -9,7 +8,7 @@ type TThreeDModelProps = {
 };
 
 export const ThreeDModel = ({ src }: TThreeDModelProps) => {
-  const { updateLoadingProgress, updateHasModelRendered } = useThreeDLoadingContext();
+  const { updateLoadingProgress } = useThreeDLoadingContext();
 
   const { model } = useModelLoader({
     url: src,
@@ -18,10 +17,6 @@ export const ThreeDModel = ({ src }: TThreeDModelProps) => {
       updateLoadingProgress(Math.min(Math.ceil((progress.loaded / progress.total) * 100), 100));
     }
   });
-
-  useEffect(() => {
-    if (model) updateHasModelRendered(true);
-  }, [model, updateHasModelRendered]);
 
   return <>{model && <Model model={model as Group} />}</>;
 };
