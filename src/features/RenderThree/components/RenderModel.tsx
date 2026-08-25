@@ -4,11 +4,12 @@ import { useRef } from 'react';
 import type { Group } from 'three';
 import { type GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-import { useCenterModel } from '../../hooks/useCenterModel';
-import { useModelAnimation } from '../../hooks/useModelAnimation';
-import { useNodeAnimation } from '../../hooks/useNodeAnimation';
+import { useCenterModel } from '../hooks/useCenterModel.ts';
+import { useModelAnimation } from '../hooks/useModelAnimation.ts';
+import { useNodeAnimation } from '../hooks/useNodeAnimation.ts';
 
 import { NodeDirectionIndicator } from './NodeDirectionIndicator.tsx';
+import { PerformanceInfo } from './PerformanceInfo.tsx';
 
 type TRenderModelProps = Readonly<{
   src: string;
@@ -40,6 +41,7 @@ export const RenderModel: React.FC<TRenderModelProps> = ({ src }) => {
           <strong>{displaySpeed.toFixed(2)} units/s</strong>
         </div>
       </Html>
+      <PerformanceInfo />
     </group>
   );
 };
