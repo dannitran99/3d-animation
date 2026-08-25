@@ -5,24 +5,32 @@ import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
 
 import { RenderModel } from './components/RenderModel';
+import { SceneLights } from './components/Scene/SceneLights';
+import { CAMERA_CONFIG, MODEL_SRC } from './constants';
 
-const FILE_SRC = new URL('../../assets/3dModel/ridgeback_franka.glb', import.meta.url).href;
+type TRenderThreeProps = Readonly<{
+  trackedNodeName?: string;
+  showPerformanceStats?: boolean;
+}>;
 
-export const RenderThree = () => {
+export const RenderThree = ({
+  trackedNodeName,
+  showPerformanceStats = false
+}: TRenderThreeProps) => {
   return (
     <div className="model-render">
       <div className="model-render__container">
         <div className="model-render__preview">
-          <Canvas shadows camera={{ position: [5, 1, 5], fov: 25 }}>
-            {/* <color attach="background" args={['#ffe6e6']} /> */}
-            <ambientLight intensity={0.6} />
-            <directionalLight position={[5, 5, 5]} intensity={1} />
-            <directionalLight position={[-5, 5, -5]} intensity={0.5} />
+          <Canvas shadows camera={CAMERA_CONFIG}>
+            <SceneLights />
             <Suspense fallback={null}>
-              <RenderModel src={FILE_SRC} />
+              <RenderModel
+                src={MODEL_SRC}
+                trackedNodeName={trackedNodeName}
+                showPerformanceStats={showPerformanceStats}
+              />
             </Suspense>
             <OrbitControls />
-            {/* <axesHelper args={[2]} /> */}
           </Canvas>
         </div>
       </div>

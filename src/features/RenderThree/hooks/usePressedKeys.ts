@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-type TUsePressedKeys = {
-  keys: readonly string[];
-};
+import type { TUsePressedKeys } from '../type';
 
 export const usePressedKeys = ({ keys }: TUsePressedKeys) => {
   const pressedKeysRef = useRef(new Set<string>());

@@ -1,6 +1,6 @@
 import { RenderThree } from '@/features/RenderThree';
 
-export const Exe: React.FC = () => {
+export const ManipulatorSimulation: React.FC = () => {
   return (
     <div>
       <RenderThree />

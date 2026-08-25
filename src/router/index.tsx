@@ -1,7 +1,7 @@
 import { MainLayout } from '@layouts';
-import { Exe, HomePage, NotFoundPage } from '@pages';
+import { HomePage, ManipulatorSimulation, ModelMovement, NotFoundPage } from '@pages';
 import React from 'react';
-import { createBrowserRouter,RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const routes = createBrowserRouter([
   {
@@ -14,8 +14,12 @@ const routes = createBrowserRouter([
         element: <HomePage />
       },
       {
-        path: '/exe',
-        element: <Exe />
+        path: '/model-movement', // Route con
+        element: <ModelMovement />
+      },
+      {
+        path: '/manipulator-simulation', // Route con
+        element: <ManipulatorSimulation />
       }
       // Thêm các route khác ở đây
     ]
