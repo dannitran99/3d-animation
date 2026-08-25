@@ -1,66 +1,4 @@
-import { OrbitControls } from '@react-three/drei';
-import { Canvas, useLoader } from '@react-three/fiber';
-import React, { Suspense, useEffect, useRef } from 'react';
-import { AnimationMixer, Box3, type Group,Vector3 } from 'three';
-import { type GLTF,GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-
-const MODEL_URL = new URL('../../assets/3dModel/kindmita_animation.glb', import.meta.url).href;
-
-const NotFoundModel: React.FC = () => {
-  const groupRef = useRef<Group>(null);
-  const mixerRef = useRef<AnimationMixer | null>(null);
-
-  const gltf = useLoader(GLTFLoader, MODEL_URL) as GLTF;
-
-  useEffect(() => {
-    const group = groupRef.current;
-    if (!group) return;
-
-    // center and normalize scale so the model always fits the view
-    const box = new Box3().setFromObject(gltf.scene);
-    const size = new Vector3();
-    const center = new Vector3();
-    box.getSize(size);
-    box.getCenter(center);
-
-    const maxDimension = Math.max(size.x, size.y, size.z) || 1;
-    const scale = 2.5 / maxDimension;
-    group.scale.setScalar(scale);
-    group.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
-
-    if (gltf.animations.length > 0) {
-      const mixer = new AnimationMixer(gltf.scene);
-      gltf.animations.forEach((clip) => mixer.clipAction(clip).play());
-      mixerRef.current = mixer;
-    }
-
-    return () => {
-      mixerRef.current?.stopAllAction();
-      mixerRef.current = null;
-    };
-  }, [gltf]);
-
-  useEffect(() => {
-    let frameId: number;
-    let lastTime = performance.now();
-
-    const animate = (time: number) => {
-      const delta = (time - lastTime) / 1000;
-      lastTime = time;
-      mixerRef.current?.update(delta);
-      frameId = requestAnimationFrame(animate);
-    };
-
-    frameId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frameId);
-  }, []);
-
-  return (
-    <group ref={groupRef}>
-      <primitive object={gltf.scene} />
-    </group>
-  );
-};
+import React from 'react';
 
 export const NotFoundPage: React.FC = () => {
   return (
@@ -78,15 +16,6 @@ export const NotFoundPage: React.FC = () => {
         <h1>404 - Page Not Found</h1>
         <p>The page you are looking for does not exist.</p>
       </div>
-      <Canvas shadows camera={{ position: [5, 1, 5], fov: 25 }}>
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
-        <directionalLight position={[-5, 5, -5]} intensity={0.5} />
-        <Suspense fallback={null}>
-          <NotFoundModel />
-        </Suspense>
-        <OrbitControls />
-      </Canvas>
     </div>
   );
 };
