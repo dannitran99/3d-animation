@@ -5,7 +5,7 @@ import { ColorPickerButton } from '../ColorPickerButton';
 export function BackgroundSetting() {
   const { backgroundColor, changeBackgroundColor } = useThreeDToolsContext();
   return (
-    <div className="color-field flex-wrap hstack gap-1">
+    <div className="flex flex-wrap hstack gap-1">
       {FRAME_BACKGROUND_COLOR_PICKER.map((e) => (
         <ColorPickerButton
           isDisabled={false}
