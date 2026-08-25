@@ -14,6 +14,7 @@ export const RenderThree = () => {
       <div className="model-render__container">
         <div className="model-render__preview">
           <Canvas shadows camera={{ position: [5, 1, 5], fov: 25 }}>
+            {/* <color attach="background" args={['#ffe6e6']} /> */}
             <ambientLight intensity={0.6} />
             <directionalLight position={[5, 5, 5]} intensity={1} />
             <directionalLight position={[-5, 5, -5]} intensity={0.5} />
@@ -21,6 +22,7 @@ export const RenderThree = () => {
               <RenderModel src={FILE_SRC} />
             </Suspense>
             <OrbitControls />
+            {/* <axesHelper args={[2]} /> */}
           </Canvas>
         </div>
       </div>
