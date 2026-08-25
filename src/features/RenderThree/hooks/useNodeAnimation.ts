@@ -21,11 +21,13 @@ export const useNodeAnimation = ({
   rotationSpeed = 2
 }: TUseNodeAnimation) => {
   const nodeRef = useRef<Object3D | null>(null);
-  const velocityRef = useRef({ forward: 0, rotation: 0 });
+  const velocityRef = useRef({ forward: 0, rotation: 0, speed: 0 });
+  const velocityUiTimerRef = useRef(0);
 
   const lastPathPointRef = useRef<Vector3 | null>(null);
   const pathNodeRef = useRef<Object3D | null>(null);
   const [pathPoints, setPathPoints] = useState<Vector3[]>([]);
+  const [displaySpeed, setDisplaySpeed] = useState(0);
 
   const pressedKeysRef = usePressedKeys({
     keys: ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown']
@@ -82,6 +84,15 @@ export const useNodeAnimation = ({
     node.rotation.y += velocityRef.current.rotation * delta;
     node.translateZ(velocityRef.current.forward * delta);
 
+    //cal velocity
+    velocityRef.current.speed = Math.abs(velocityRef.current.forward);
+
+    velocityUiTimerRef.current += delta;
+    if (velocityUiTimerRef.current >= 0.05) {
+      velocityUiTimerRef.current = 0;
+      setDisplaySpeed(velocityRef.current.speed);
+    }
+
     const pathParent = pathParentRef.current;
     if (!pathParent || Math.abs(velocityRef.current.forward) < 0.01) return;
 
@@ -93,5 +104,8 @@ export const useNodeAnimation = ({
     setPathPoints((points) => [...points.slice(-299), pathPoint]);
   });
 
-  return pathPoints;
+  return {
+    pathPoints,
+    displaySpeed
+  };
 };

@@ -1,4 +1,4 @@
-import { Line } from '@react-three/drei';
+import { Html, Line } from '@react-three/drei';
 import { useLoader } from '@react-three/fiber';
 import { useRef } from 'react';
 import type { Group } from 'three';
@@ -24,13 +24,22 @@ export const RenderModel: React.FC<TRenderModelProps> = ({ src }) => {
   //for default animation
   useModelAnimation({ gltf });
 
-  const pathPoints = useNodeAnimation({ gltf, nodeName: 'Base', pathParentRef: groupRef });
-
+  const { displaySpeed, pathPoints } = useNodeAnimation({
+    gltf,
+    nodeName: 'Base',
+    pathParentRef: groupRef
+  });
   return (
     <group ref={groupRef}>
       <primitive object={gltf.scene} />
       <NodeDirectionIndicator gltf={gltf} nodeName="Base" />
       {pathPoints.length > 1 && <Line points={pathPoints} color="#ff6b35" lineWidth={3} />}
+      <Html fullscreen className="robot-velocity">
+        <div className="robot-velocity__panel">
+          <span className="robot-velocity__label">Robot velocity</span>
+          <strong>{displaySpeed.toFixed(2)} units/s</strong>
+        </div>
+      </Html>
     </group>
   );
 };
