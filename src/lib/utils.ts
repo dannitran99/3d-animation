@@ -1,6 +1,7 @@
-import { ACCEPT_3D_FILES } from '@/constants';
-import { clsx, type ClassValue } from 'clsx';
+import { type ClassValue,clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+
+import { ACCEPT_3D_FILES } from '@/constants';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

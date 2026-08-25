@@ -1,8 +1,11 @@
 import './index.scss';
 
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
-// const NAV_LINKS = ['Trang chủ', 'Giới thiệu', 'Dịch vụ', 'Liên hệ'];
+const NAV_LINKS = [
+  { label: 'Model Inspect', href: '/' },
+  { label: 'Model Movement', href: '/exe' }
+];
 
 export const MainLayout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   return (
@@ -10,15 +13,15 @@ export const MainLayout: React.FC<{ children?: React.ReactNode }> = ({ children 
       <header className="main-layout__header">
         <span className="main-layout__logo">3D Animation</span>
 
-        {/* <nav className="main-layout__nav">
-          {NAV_LINKS.map((label) => (
-            <button key={label} type="button" className="main-layout__nav-link">
+        <nav className="main-layout__nav">
+          {NAV_LINKS.map(({ label, href }) => (
+            <Link key={label} to={href} className="main-layout__nav-link">
               {label}
-            </button>
+            </Link>
           ))}
         </nav>
 
-        <button type="button" className="main-layout__cta">
+        {/* <button type="button" className="main-layout__cta">
           Bắt đầu
         </button> */}
       </header>

@@ -1,19 +1,19 @@
 import {
   createContext,
-  useContext,
-  useMemo,
-  useRef,
-  useState,
   type Dispatch,
   type MutableRefObject,
   type ReactNode,
-  type SetStateAction
-} from 'react';
+  type SetStateAction,
+  useContext,
+  useMemo,
+  useRef,
+  useState} from 'react';
 import type { AnimationClip } from 'three';
-import type { TColorPicker } from '../type';
-import { FRAME_BACKGROUND_COLOR_PICKER, WIRE_FRAME_COLOR_PICKER } from '../constants';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+import { FRAME_BACKGROUND_COLOR_PICKER, WIRE_FRAME_COLOR_PICKER } from '../constants';
+import type { TColorPicker } from '../type';
+
+ 
 type TThreeDToolsContext = {
   isBoundingBoxOn: boolean;
   toggleBoundingBoxMode: () => void;

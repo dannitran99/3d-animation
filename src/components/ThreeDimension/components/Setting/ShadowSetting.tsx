@@ -19,27 +19,40 @@ export const ShadowSetting = () => {
   };
 
   return (
-    <div className="container vstack gap-2 p-0">
-      <ToggleButton isOn={isModelShadowOn} color="#f59e0b" handleClick={toggleModelShadow} />
-
-      <div className="hstack gap-2 justify-content-between">
-        <span className={!isModelShadowOn ? 'text-muted' : 'text-secondary'}>Contact Mode</span>
-        <ToggleButton
-          isOn={isContactShadowMode}
-          color="#f59e0b"
-          handleClick={toggleContactShadowMode}
-          isDisabled={!isModelShadowOn}
-        />
+    <div className="flex w-full flex-col gap-2">
+      <div className="flex items-center justify-between gap-2">
+        <span className="text-xs text-gray-100">Model Shadow</span>
+        <ToggleButton isOn={isModelShadowOn} color="#f59e0b" handleClick={toggleModelShadow} />
       </div>
 
-      <div className="hstack gap-2 justify-content-between">
-        <span className={!isModelShadowOn ? 'text-muted' : 'text-secondary'}>Ground Mode</span>
-        <ToggleButton
-          isOn={isGroundShadowMode}
-          color="#f59e0b"
-          handleClick={handleToggleGroundShadowMode}
-          isDisabled={!isModelShadowOn}
-        />
+      <div className="flex flex-col gap-2 border-l border-border pl-3">
+        <div className="flex items-center justify-between gap-2">
+          <span
+            className={isModelShadowOn ? 'text-xs text-gray-100' : 'text-xs text-muted-foreground'}
+          >
+            Contact Mode
+          </span>
+          <ToggleButton
+            isOn={isContactShadowMode}
+            color="#f59e0b"
+            handleClick={toggleContactShadowMode}
+            isDisabled={!isModelShadowOn}
+          />
+        </div>
+
+        <div className="flex items-center justify-between gap-2">
+          <span
+            className={isModelShadowOn ? 'text-xs text-gray-100' : 'text-xs text-muted-foreground'}
+          >
+            Ground Mode
+          </span>
+          <ToggleButton
+            isOn={isGroundShadowMode}
+            color="#f59e0b"
+            handleClick={handleToggleGroundShadowMode}
+            isDisabled={!isModelShadowOn}
+          />
+        </div>
       </div>
     </div>
   );

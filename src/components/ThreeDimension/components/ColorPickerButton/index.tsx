@@ -1,6 +1,7 @@
 import './index.scss';
 
 import clsx from 'clsx';
+
 import type { TColorPicker } from '../../type';
 
 type TWireFrameColorCheckBoxProps = Readonly<{

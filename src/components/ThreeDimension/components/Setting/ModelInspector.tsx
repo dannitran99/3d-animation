@@ -1,7 +1,8 @@
-import type { ReactNode } from 'react';
 import './ModelInspector.scss';
 
 import { clsx } from 'clsx';
+import type { ReactNode } from 'react';
+
 import { BackgroundSetting } from './BackgroundSetting';
 import { ShadowSetting } from './ShadowSetting';
 
@@ -17,8 +18,13 @@ type TInspectorMainSectionProps = Readonly<{
 
 function InspectorMainSection({ title, flexColumn = false, action }: TInspectorMainSectionProps) {
   return (
-    <div className={clsx('controller gap-2', flexColumn ? 'vstack' : 'hstack')}>
-      <span className="controller-text text-secondary">{title}:</span>
+    <div
+      className={clsx(
+        'flex gap-2',
+        flexColumn ? 'flex-col items-start' : 'items-center justify-between'
+      )}
+    >
+      <span className="text-xs whitespace-nowrap text-muted-foreground">{title}:</span>
       {action}
     </div>
   );
@@ -41,12 +47,12 @@ export function ModelInspector({ isOpened }: TModelInspectorProps) {
             action={<BackgroundSetting />}
           />
         </div>
-        <div className="feature">
+        <div className="mt-3 feature">
           <span className="text-muted feature__title">Shadow Helper</span>
-          <InspectorMainSection title="Model Shadow" action={<ShadowSetting />} />
+          <ShadowSetting />
         </div>
         {/* <BoneHelper /> */}
-        <div className="feature">
+        <div className="mt-3 feature">
           <span className="text-muted feature__title">Lights Helper</span>
           {/* <LightsHelper /> */}
         </div>

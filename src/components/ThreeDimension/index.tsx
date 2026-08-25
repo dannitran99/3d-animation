@@ -1,16 +1,17 @@
 import './index.scss';
 
-import { ThreeDToolsProvider } from './providers/ThreeDToolsProvider';
-import { ThreeDLoadingProvider } from './providers/ThreeDLoadingProvider';
+import { OrbitControls, Preload } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Suspense, useState } from 'react';
-import { ThreeDModel } from './components/Scene/ThreeDModel';
+
+import { BackgroundModel } from './components/Scene/BackgroundModel';
 import { ProgressLoader } from './components/Scene/ProgressLoader';
-import { OrbitControls, Preload } from '@react-three/drei';
 import { ThreeDLight } from './components/Scene/ThreeDLight';
+import { ThreeDModel } from './components/Scene/ThreeDModel';
 import { ActionsPreview } from './components/Setting/ActionPreview';
 import { ModelInspector } from './components/Setting/ModelInspector';
-import { BackgroundModel } from './components/Scene/BackgroundModel';
+import { ThreeDLoadingProvider } from './providers/ThreeDLoadingProvider';
+import { ThreeDToolsProvider } from './providers/ThreeDToolsProvider';
 type TThreeDimensionProps = Readonly<{
   src: string;
 }>;

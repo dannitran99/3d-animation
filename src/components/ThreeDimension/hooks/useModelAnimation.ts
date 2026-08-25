@@ -3,6 +3,7 @@
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useMemo } from 'react';
 import { AnimationMixer, AnimationObjectGroup, Object3D, type Object3DEventMap } from 'three';
+
 import { useThreeDToolsContext } from '../providers/ThreeDToolsProvider';
 
 type TUseModelAnimation = {

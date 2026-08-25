@@ -1,16 +1,17 @@
-import { OrbitControls } from '@react-three/drei';
-import { Canvas, useLoader } from '@react-three/fiber';
-import React, { Suspense, useEffect, useRef } from 'react';
-import { AnimationMixer, Box3, type Group,Vector3 } from 'three';
-import { type GLTF,GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { useLoader } from '@react-three/fiber';
+import { useEffect, useRef } from 'react';
+import { AnimationMixer, Box3, type Group, Vector3 } from 'three';
+import { type GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-const MODEL_URL = new URL('../../assets/3dModel/kindmita_animation.glb', import.meta.url).href;
+type TRenderModelProps = Readonly<{
+  src: string;
+}>;
 
-const NotFoundModel: React.FC = () => {
+export const RenderModel: React.FC<TRenderModelProps> = ({ src }) => {
   const groupRef = useRef<Group>(null);
   const mixerRef = useRef<AnimationMixer | null>(null);
 
-  const gltf = useLoader(GLTFLoader, MODEL_URL) as GLTF;
+  const gltf = useLoader(GLTFLoader, src) as GLTF;
 
   useEffect(() => {
     const group = groupRef.current;
@@ -28,6 +29,7 @@ const NotFoundModel: React.FC = () => {
     group.scale.setScalar(scale);
     group.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
 
+    console.log(gltf.animations.length, gltf);
     if (gltf.animations.length > 0) {
       const mixer = new AnimationMixer(gltf.scene);
       gltf.animations.forEach((clip) => mixer.clipAction(clip).play());
@@ -59,34 +61,5 @@ const NotFoundModel: React.FC = () => {
     <group ref={groupRef}>
       <primitive object={gltf.scene} />
     </group>
-  );
-};
-
-export const NotFoundPage: React.FC = () => {
-  return (
-    <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-      <div
-        style={{
-          position: 'absolute',
-          top: '10%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          textAlign: 'center',
-          zIndex: 1
-        }}
-      >
-        <h1>404 - Page Not Found</h1>
-        <p>The page you are looking for does not exist.</p>
-      </div>
-      <Canvas shadows camera={{ position: [5, 1, 5], fov: 25 }}>
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
-        <directionalLight position={[-5, 5, -5]} intensity={0.5} />
-        <Suspense fallback={null}>
-          <NotFoundModel />
-        </Suspense>
-        <OrbitControls />
-      </Canvas>
-    </div>
   );
 };
