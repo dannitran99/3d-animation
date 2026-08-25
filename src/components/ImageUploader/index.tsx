@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { isPathOf3dModel } from '@/lib/utils';
+
 import { ThreeDimension } from '../ThreeDimension';
 
 export const ImageUploader: React.FC = () => {

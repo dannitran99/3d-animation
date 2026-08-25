@@ -1,5 +1,5 @@
-import { Object3D } from 'three';
 import * as THREE from 'three';
+import { Object3D } from 'three';
 
 export function getMeshesFromObject3d(object: Object3D): Array<THREE.Mesh> {
   if ((object as THREE.Mesh).isMesh) {

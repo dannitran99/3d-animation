@@ -1,5 +1,6 @@
-import { Layers, Rotate3d } from 'lucide-react';
 import clsx from 'clsx';
+import { Layers, Rotate3d } from 'lucide-react';
+
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 export const ActionsPreview: React.FC<{

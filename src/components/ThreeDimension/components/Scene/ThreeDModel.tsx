@@ -1,7 +1,8 @@
+import type { Group } from 'three';
+
 import { useModelLoader } from '../../hooks/useModelLoader';
 import { useThreeDLoadingContext } from '../../providers/ThreeDLoadingProvider';
 import { Model } from '../Model';
-import type { Group } from 'three';
 
 type TThreeDModelProps = {
   src: string;

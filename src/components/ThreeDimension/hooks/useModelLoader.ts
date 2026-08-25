@@ -1,9 +1,10 @@
-import { useThreeDToolsContext } from '@/components/ThreeDimension/providers/ThreeDToolsProvider';
 import { useLoader } from '@react-three/fiber';
 import { useEffect } from 'react';
 import type { Group } from 'three';
 import * as THREE from 'three';
 import { type GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
+import { useThreeDToolsContext } from '@/components/ThreeDimension/providers/ThreeDToolsProvider';
 
 type TUseModelLoaderProps = {
   url: string;

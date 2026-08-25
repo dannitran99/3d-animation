@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
-import { Box3, Vector3 } from 'three';
 import * as THREE from 'three';
+import { Box3, Vector3 } from 'three';
+
 import {
   GROUND_ANTI_Z_COLLISION_DISTANCE,
   MODEL_MAX_HEIGHT_LENGTH,

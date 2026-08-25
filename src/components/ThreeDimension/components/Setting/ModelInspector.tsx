@@ -1,7 +1,8 @@
-import type { ReactNode } from 'react';
 import './ModelInspector.scss';
 
 import { clsx } from 'clsx';
+import type { ReactNode } from 'react';
+
 import { BackgroundSetting } from './BackgroundSetting';
 import { ShadowSetting } from './ShadowSetting';
 

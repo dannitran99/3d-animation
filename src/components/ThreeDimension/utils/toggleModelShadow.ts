@@ -1,5 +1,5 @@
-import { Object3D } from 'three';
 import * as THREE from 'three';
+import { Object3D } from 'three';
 
 export function toggleModelShadow(object: Object3D, isOn: boolean): void {
   object.traverse((child) => {

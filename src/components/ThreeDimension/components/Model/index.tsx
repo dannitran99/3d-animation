@@ -1,13 +1,15 @@
 import { useEffect, useMemo } from 'react';
 import type { Group } from 'three';
-import { getMeshesFromObject3d } from '../../utils/getMeshesFromObject3d';
+
+import { useModelAnimation } from '../../hooks/useModelAnimation';
 import { useModelDefaultAttributes } from '../../hooks/useModelDefaultAttributes';
-import { Primitive } from './Primitive';
 import { useThreeDLoadingContext } from '../../providers/ThreeDLoadingProvider';
 import { useThreeDToolsContext } from '../../providers/ThreeDToolsProvider';
-import { useModelAnimation } from '../../hooks/useModelAnimation';
+import { getMeshesFromObject3d } from '../../utils/getMeshesFromObject3d';
 import { toggleModelShadow } from '../../utils/toggleModelShadow';
+
 import { ModelShadow } from './ModelShadow';
+import { Primitive } from './Primitive';
 
 type TModelProps = Readonly<{
   model: Group;
