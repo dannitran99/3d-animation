@@ -1,47 +1,54 @@
-import { Html, Line } from '@react-three/drei';
-import { useLoader } from '@react-three/fiber';
+import { Line } from '@react-three/drei';
 import { useRef } from 'react';
 import type { Group } from 'three';
-import { type GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
+import { PATH_TRAIL_COLOR, PATH_TRAIL_LINE_WIDTH } from '../constants';
 import { useCenterModel } from '../hooks/useCenterModel.ts';
+import { useGltfModel } from '../hooks/useGltfModel.ts';
 import { useModelAnimation } from '../hooks/useModelAnimation.ts';
 import { useNodeAnimation } from '../hooks/useNodeAnimation.ts';
+import type { TRenderModelProps } from '../type';
 
+import { PerformanceStatsPanel } from './Hud/PerformanceStatsPanel';
+import { RobotVelocityPanel } from './Hud/RobotVelocityPanel';
 import { NodeDirectionIndicator } from './NodeDirectionIndicator.tsx';
-import { PerformanceInfo } from './PerformanceInfo.tsx';
 
-type TRenderModelProps = Readonly<{
-  src: string;
-}>;
-
-export const RenderModel: React.FC<TRenderModelProps> = ({ src }) => {
+export const RenderModel: React.FC<TRenderModelProps> = ({
+  src,
+  trackedNodeName,
+  showPerformanceStats = false
+}) => {
   const groupRef = useRef<Group>(null);
 
-  const gltf = useLoader(GLTFLoader, src) as GLTF;
+  const gltf = useGltfModel(src);
 
   useCenterModel({ gltf, groupRef });
 
-  //for default animation
+  // plays the model's embedded default animation clips
   useModelAnimation({ gltf });
 
+  // no-ops internally when trackedNodeName is not provided
   const { displaySpeed, pathPoints } = useNodeAnimation({
     gltf,
-    nodeName: 'Base',
+    nodeName: trackedNodeName,
     pathParentRef: groupRef
   });
+
   return (
     <group ref={groupRef}>
       <primitive object={gltf.scene} />
-      <NodeDirectionIndicator gltf={gltf} nodeName="Base" />
-      {pathPoints.length > 1 && <Line points={pathPoints} color="#ff6b35" lineWidth={3} />}
-      <Html fullscreen className="robot-velocity">
-        <div className="robot-velocity__panel">
-          <span className="robot-velocity__label">Robot velocity</span>
-          <strong>{displaySpeed.toFixed(2)} units/s</strong>
-        </div>
-      </Html>
-      <PerformanceInfo />
+
+      {trackedNodeName && (
+        <>
+          <NodeDirectionIndicator gltf={gltf} nodeName={trackedNodeName} />
+          {pathPoints.length > 1 && (
+            <Line points={pathPoints} color={PATH_TRAIL_COLOR} lineWidth={PATH_TRAIL_LINE_WIDTH} />
+          )}
+          <RobotVelocityPanel speed={displaySpeed} />
+        </>
+      )}
+
+      {showPerformanceStats && <PerformanceStatsPanel />}
     </group>
   );
 };

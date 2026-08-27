@@ -1,10 +1,8 @@
+import { useFrame } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
 import { AnimationMixer } from 'three';
-import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-type TUseModelAnimation = {
-  gltf: GLTF;
-};
+import type { TUseModelAnimation } from '../type';
 
 export const useModelAnimation = ({ gltf }: TUseModelAnimation) => {
   const mixerRef = useRef<AnimationMixer | null>(null);
@@ -22,18 +20,7 @@ export const useModelAnimation = ({ gltf }: TUseModelAnimation) => {
     };
   }, [gltf]);
 
-  useEffect(() => {
-    let frameId: number;
-    let lastTime = performance.now();
-
-    const animate = (time: number) => {
-      const delta = (time - lastTime) / 1000;
-      lastTime = time;
-      mixerRef.current?.update(delta);
-      frameId = requestAnimationFrame(animate);
-    };
-
-    frameId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frameId);
-  }, []);
+  useFrame((_, delta) => {
+    mixerRef.current?.update(delta);
+  });
 };

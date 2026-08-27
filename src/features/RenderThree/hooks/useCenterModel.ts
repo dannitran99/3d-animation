@@ -1,11 +1,8 @@
 import { useEffect } from 'react';
-import { Box3, type Group, Vector3 } from 'three';
-import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { Box3, Vector3 } from 'three';
 
-type TUseCenterModel = {
-  gltf: GLTF;
-  groupRef: React.RefObject<Group | null>;
-};
+import { MODEL_TARGET_SIZE } from '../constants';
+import type { TUseCenterModel } from '../type';
 
 // center and normalize scale so the model always fits the view
 export const useCenterModel = ({ gltf, groupRef }: TUseCenterModel) => {
@@ -20,7 +17,7 @@ export const useCenterModel = ({ gltf, groupRef }: TUseCenterModel) => {
     box.getCenter(center);
 
     const maxDimension = Math.max(size.x, size.y, size.z) || 1;
-    const scale = 2.5 / maxDimension;
+    const scale = MODEL_TARGET_SIZE / maxDimension;
     group.scale.setScalar(scale);
     group.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
   }, [gltf, groupRef]);

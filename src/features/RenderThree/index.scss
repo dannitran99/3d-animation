@@ -34,14 +34,13 @@
   }
 }
 
-.robot-velocity {
+.hud-panel-layer {
   pointer-events: none;
 }
 
-.robot-velocity__panel {
+.hud-panel {
   position: absolute;
   top: 16px;
-  left: 16px;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -54,9 +53,17 @@
   line-height: 1.35;
   white-space: nowrap;
   backdrop-filter: blur(8px);
+
+  &--top-left {
+    left: 16px;
+  }
+
+  &--top-right {
+    right: 16px;
+  }
 }
 
-.robot-velocity__label {
+.hud-panel__label {
   color: #94a3b8;
   font-size: 11px;
   text-transform: uppercase;

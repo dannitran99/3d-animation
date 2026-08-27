@@ -1,17 +1,13 @@
 import { useEffect } from 'react';
 import { ArrowHelper, Vector3 } from 'three';
-import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-type TNodeDirectionIndicatorProps = {
-  gltf: GLTF;
-  nodeName: string;
-  length?: number;
-};
+import { DIRECTION_INDICATOR_COLOR, DIRECTION_INDICATOR_LENGTH } from '../constants';
+import type { TNodeDirectionIndicatorProps } from '../type';
 
 export const NodeDirectionIndicator = ({
   gltf,
   nodeName,
-  length = 0.8
+  length = DIRECTION_INDICATOR_LENGTH
 }: TNodeDirectionIndicatorProps) => {
   useEffect(() => {
     const node = gltf.scene.getObjectByName(nodeName);
@@ -23,7 +19,7 @@ export const NodeDirectionIndicator = ({
       direction,
       origin,
       length,
-      '#00b894',
+      DIRECTION_INDICATOR_COLOR,
       length * 0.25,
       length * 0.15
     );
