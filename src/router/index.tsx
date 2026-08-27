@@ -1,5 +1,5 @@
 import { MainLayout } from '@layouts';
-import { HomePage, ManipulatorSimulation, ModelMovement, NotFoundPage } from '@pages';
+import { HomePage, NotFoundPage } from '@pages';
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -12,16 +12,7 @@ const routes = createBrowserRouter([
       {
         index: true, // Route mặc định của cha ('/')
         element: <HomePage />
-      },
-      {
-        path: '/model-movement', // Route con
-        element: <ModelMovement />
-      },
-      {
-        path: '/manipulator-simulation', // Route con
-        element: <ManipulatorSimulation />
       }
-      // Thêm các route khác ở đây
     ]
   }
 ]);
