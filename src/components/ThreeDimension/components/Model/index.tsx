@@ -8,7 +8,9 @@ import { useThreeDToolsContext } from '../../providers/ThreeDToolsProvider';
 import { getMeshesFromObject3d } from '../../utils/getMeshesFromObject3d';
 import { toggleModelShadow } from '../../utils/toggleModelShadow';
 
+import { ModelBoundingBoxHelper } from './ModelBoudingBox';
 import { ModelShadow } from './ModelShadow';
+import { ModelWireFrame } from './ModelWireFrame';
 import { Primitive } from './Primitive';
 
 type TModelProps = Readonly<{
@@ -32,8 +34,12 @@ export const Model = ({ model }: TModelProps) => {
     meshes: meshes
   });
 
-  const { isWireFrameOn, isBoundingBoxOn, isGroundShadowMode, isBoneOn, isBoneInfluenceOn } =
-    useThreeDToolsContext();
+  const {
+    isWireFrameOn,
+    isBoundingBoxOn,
+    isGroundShadowMode
+    // , isBoneOn, isBoneInfluenceOn
+  } = useThreeDToolsContext();
   const { updateHasModelRendered } = useThreeDLoadingContext();
 
   useEffect(() => {
@@ -54,6 +60,13 @@ export const Model = ({ model }: TModelProps) => {
 
   return (
     <>
+      <ModelBoundingBoxHelper
+        isOn={isBoundingBoxOn}
+        meshes={meshes}
+        scale={scaleVector}
+        position={positionVector}
+      />
+      <ModelWireFrame model={model} scaleVector={scaleVector} positionVector={positionVector} />
       <Primitive object={model} scale={scaleVector} position={positionVector} />
       {!isWireFrameOn && <ModelShadow position={groundPositionVector} />}
     </>

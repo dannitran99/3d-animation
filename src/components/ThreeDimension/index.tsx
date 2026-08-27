@@ -4,6 +4,7 @@ import { OrbitControls, Preload } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Suspense, useState } from 'react';
 
+import { AxesHelper } from './components/Scene/AxesHelper';
 import { BackgroundModel } from './components/Scene/BackgroundModel';
 import { ProgressLoader } from './components/Scene/ProgressLoader';
 import { ThreeDLight } from './components/Scene/ThreeDLight';
@@ -38,6 +39,7 @@ export const ThreeDimension: React.FC<TThreeDimensionProps> = ({ src }: TThreeDi
                 maxPolarAngle={2 * Math.PI}
                 enableRotate={isEnableRotate}
               />
+              <AxesHelper size={15} />
               <Preload all />
             </Suspense>
           </Canvas>

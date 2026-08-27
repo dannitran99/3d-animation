@@ -4,7 +4,10 @@ import { clsx } from 'clsx';
 import type { ReactNode } from 'react';
 
 import { BackgroundSetting } from './BackgroundSetting';
+import { BoundingBoxSetting } from './BoundingBoxSetting';
+import { LightsSetting } from './LightSetting';
 import { ShadowSetting } from './ShadowSetting';
+import { WireFrameSetting } from './WireframeSetting';
 
 type TModelInspectorProps = Readonly<{
   isOpened: boolean;
@@ -54,15 +57,15 @@ export function ModelInspector({ isOpened }: TModelInspectorProps) {
         {/* <BoneHelper /> */}
         <div className="mt-3 feature">
           <span className="text-muted feature__title">Lights Helper</span>
-          {/* <LightsHelper /> */}
+          <LightsSetting />
         </div>
         <div className="feature">
           <span className="text-muted feature__title">Bounding Box Helper</span>
-          {/* <BoundingBoxHelper /> */}
+          <BoundingBoxSetting />
         </div>
         <div className="feature">
           <span className="text-muted feature__title">Wire Frame Helper</span>
-          {/* <WireFrameHelper /> */}
+          <WireFrameSetting />
         </div>
       </div>
     </div>
