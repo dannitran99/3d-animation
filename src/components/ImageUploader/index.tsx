@@ -3,9 +3,8 @@ import './index.scss';
 import { useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
+import { ThreeDimension } from '@/features/ThreeDimension';
 import { isPathOf3dModel } from '@/lib/utils';
-
-import { ThreeDimension } from '../ThreeDimension';
 
 export const ImageUploader: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);

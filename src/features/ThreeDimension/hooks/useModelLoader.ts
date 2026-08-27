@@ -4,7 +4,7 @@ import type { Group } from 'three';
 import * as THREE from 'three';
 import { type GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-import { useThreeDToolsContext } from '@/components/ThreeDimension/providers/ThreeDToolsProvider';
+import { useThreeDToolsContext } from '../providers/ThreeDToolsProvider';
 
 type TUseModelLoaderProps = {
   url: string;
