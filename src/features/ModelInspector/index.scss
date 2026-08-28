@@ -54,3 +54,188 @@
   background-color: #fff;
   color: #000;
 }
+
+.animation-controls {
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  bottom: 1px;
+  padding: 0 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  transition:
+    left 0.15s linear,
+    width 0.15s linear;
+
+  &-state--default {
+    width: 100%;
+    left: 0;
+  }
+
+  &-state--shifted-right {
+    width: calc(100% - 13.75rem);
+    left: 13.75rem;
+  }
+
+  .animation-playbar {
+    width: 100%;
+    height: 2px;
+  }
+
+  .animation__container {
+    margin-bottom: 8px;
+    position: relative;
+    height: 36px;
+
+    & .control-menu-container {
+      position: absolute;
+      bottom: 35px;
+      left: 0;
+      width: 18rem;
+      height: calc(14 * 16px);
+      padding: 8px;
+      background-color: rgba(65, 64, 64, 0.75);
+      border-radius: 8px;
+      visibility: hidden;
+      transition: opacity linear 0.25s;
+      opacity: 0;
+      font-size: 14px;
+
+      &--show {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+
+  .animation-action-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: all linear 0.15s;
+    text-shadow: 0 0 8px #ccc;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background-color: #ccc;
+    opacity: 0.4;
+    font-size: 14px;
+    color: #fff;
+
+    &--selected,
+    &:hover {
+      opacity: 0.8;
+    }
+    .animation-name {
+      padding: 2px 8px;
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      width: 100px;
+      cursor: default;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+
+  .animation-action {
+    &__volume {
+      width: 36px;
+      transition: all linear 0.15s;
+      &:hover {
+        width: 100px;
+        .animation-action__volume-slider {
+          opacity: 1;
+        }
+      }
+      &-button {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        cursor: pointer;
+      }
+      &-slider {
+        opacity: 0;
+        width: 50px;
+        height: 1px;
+        margin-left: 4px;
+        -webkit-appearance: none;
+        appearance: none;
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          height: 11px;
+          width: 11px;
+          background-color: #fff;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+        &::-moz-range-thumb {
+          height: 11px;
+          width: 11px;
+          background-color: #fff;
+          border-radius: 50%;
+          cursor: pointer;
+          border: none;
+        }
+      }
+    }
+  }
+
+  .animation-speed {
+    display: flex;
+    border-radius: 8px;
+    margin: 3px 0;
+
+    & .animation-speed__option {
+      width: 100%;
+      border: none;
+
+      color: rgb(255, 255, 255);
+
+      &--selected {
+        background-color: rgb(255, 255, 255, 0.5);
+        &:hover {
+          background-color: rgb(255, 255, 255, 0.8);
+        }
+      }
+    }
+  }
+
+  .animation-list {
+    max-height: calc(10.4 * 16px);
+    padding-top: 8px;
+    margin-top: 8px;
+    overflow-y: auto;
+    border-top: 0.5px solid var(--bs-gray);
+
+    & .animation-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 14px;
+      line-height: 24px;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      width: 100%;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &--selected {
+        color: #fff;
+      }
+    }
+  }
+}
