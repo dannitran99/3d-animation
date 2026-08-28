@@ -3,7 +3,7 @@ import './index.scss';
 import { useRef } from 'react';
 
 import { Button } from '@/components/ui/button';
-import { ThreeDimension } from '@/features/ThreeDimension';
+import { ModelInspector } from '@/features/ModelInspector';
 import { isPathOf3dModel } from '@/lib/utils';
 
 type TImageUploaderProps = Readonly<{
@@ -44,7 +44,7 @@ export const ImageUploader: React.FC<TImageUploaderProps> = ({
       <div className="image-uploader__preview">
         {previewUrl ? (
           shouldShow3dModel ? (
-            <ThreeDimension src={previewUrl} />
+            <ModelInspector src={previewUrl} />
           ) : (
             <img src={previewUrl} alt={fileName ?? 'preview'} />
           )

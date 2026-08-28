@@ -1,4 +1,4 @@
-import './ModelInspector.scss';
+import './ModelInspectorSetting.scss';
 
 import { clsx } from 'clsx';
 import type { ReactNode } from 'react';
@@ -33,7 +33,7 @@ function InspectorMainSection({ title, flexColumn = false, action }: TInspectorM
   );
 }
 
-export function ModelInspector({ isOpened }: TModelInspectorProps) {
+export function ModelInspectorSetting({ isOpened }: TModelInspectorProps) {
   return (
     <div
       className={clsx(

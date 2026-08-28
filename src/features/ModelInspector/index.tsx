@@ -10,14 +10,14 @@ import { ProgressLoader } from './components/Scene/ProgressLoader';
 import { ThreeDLight } from './components/Scene/ThreeDLight';
 import { ThreeDModel } from './components/Scene/ThreeDModel';
 import { ActionsPreview } from './components/Setting/ActionPreview';
-import { ModelInspector } from './components/Setting/ModelInspector';
+import { ModelInspectorSetting } from './components/Setting/ModelInspectorSetting';
 import { ThreeDLoadingProvider } from './providers/ThreeDLoadingProvider';
 import { ThreeDToolsProvider } from './providers/ThreeDToolsProvider';
 type TThreeDimensionProps = Readonly<{
   src: string;
 }>;
 
-export const ThreeDimension: React.FC<TThreeDimensionProps> = ({ src }: TThreeDimensionProps) => {
+export const ModelInspector: React.FC<TThreeDimensionProps> = ({ src }: TThreeDimensionProps) => {
   const [isHelperBarOn, setIsHelperBarOn] = useState(false);
   const [isEnableRotate, setIsEnableRotate] = useState(true);
   const toggleHelperBar = () => setIsHelperBarOn((prev) => !prev);
@@ -27,7 +27,7 @@ export const ThreeDimension: React.FC<TThreeDimensionProps> = ({ src }: TThreeDi
     <ThreeDToolsProvider>
       <ThreeDLoadingProvider>
         <div className="three-dimension">
-          <ModelInspector isOpened={isHelperBarOn} />
+          <ModelInspectorSetting isOpened={isHelperBarOn} />
           <ProgressLoader />
           <Canvas shadows="soft" camera={{ position: [5, 1, 5], fov: 25 }}>
             <BackgroundModel />

@@ -3,8 +3,8 @@ import './index.scss';
 import { useRef, useState } from 'react';
 
 import { ImageUploader } from '@/components/ImageUploader';
-
-import { GALLERY_MODELS, type TGalleryModel } from './constants';
+import { GALLERY_MODELS } from '@/constants';
+import type { TGalleryModel } from '@/types';
 
 export const HomePage: React.FC = () => {
   const objectUrlRef = useRef<string | null>(null);
