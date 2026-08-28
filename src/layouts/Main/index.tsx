@@ -3,9 +3,9 @@ import './index.scss';
 import { Link, Outlet } from 'react-router-dom';
 
 const NAV_LINKS = [
-  { label: 'Model Inspect', href: '/' },
-  { label: 'Model Movement', href: '/model-movement' },
-  { label: 'Manipulator Simulation', href: '/manipulator-simulation' }
+  { label: 'Model Inspect', href: '/' }
+  // { label: 'Model Movement', href: '/model-movement' },
+  // { label: 'Manipulator Simulation', href: '/manipulator-simulation' }
 ];
 
 export const MainLayout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
