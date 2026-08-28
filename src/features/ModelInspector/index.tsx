@@ -10,6 +10,7 @@ import { ProgressLoader } from './components/Scene/ProgressLoader';
 import { ThreeDLight } from './components/Scene/ThreeDLight';
 import { ThreeDModel } from './components/Scene/ThreeDModel';
 import { ActionsPreview } from './components/Setting/ActionPreview';
+import { AnimationControl } from './components/Setting/AnimationControl';
 import { ModelInspectorSetting } from './components/Setting/ModelInspectorSetting';
 import { ThreeDLoadingProvider } from './providers/ThreeDLoadingProvider';
 import { ThreeDToolsProvider } from './providers/ThreeDToolsProvider';
@@ -28,6 +29,7 @@ export const ModelInspector: React.FC<TThreeDimensionProps> = ({ src }: TThreeDi
       <ThreeDLoadingProvider>
         <div className="three-dimension">
           <ModelInspectorSetting isOpened={isHelperBarOn} />
+          <AnimationControl isModelInspectorOpen={isHelperBarOn} />
           <ProgressLoader />
           <Canvas shadows="soft" camera={{ position: [5, 1, 5], fov: 25 }}>
             <BackgroundModel />
