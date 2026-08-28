@@ -1,15 +1,25 @@
 import './index.scss';
 
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { ThreeDimension } from '@/features/ThreeDimension';
 import { isPathOf3dModel } from '@/lib/utils';
 
-export const ImageUploader: React.FC = () => {
+type TImageUploaderProps = Readonly<{
+  previewUrl: string | null;
+  fileName: string | null;
+  onFileSelect: (file: File) => void;
+  onClear: () => void;
+}>;
+
+export const ImageUploader: React.FC<TImageUploaderProps> = ({
+  previewUrl,
+  fileName,
+  onFileSelect,
+  onClear
+}: TImageUploaderProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [fileName, setFileName] = useState<string | null>(null);
 
   const handlePickFile = () => inputRef.current?.click();
 
@@ -17,15 +27,11 @@ export const ImageUploader: React.FC = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
-    setPreviewUrl(URL.createObjectURL(file));
-    setFileName(file.name);
+    onFileSelect(file);
   };
 
   const handleClear = () => {
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
-    setPreviewUrl(null);
-    setFileName(null);
+    onClear();
     if (inputRef.current) inputRef.current.value = '';
   };
 
