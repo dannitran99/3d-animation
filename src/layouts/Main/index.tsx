@@ -2,8 +2,11 @@ import './index.scss';
 
 import { Link, Outlet } from 'react-router-dom';
 
+import { ROUTE } from '@/constants/router';
+
 const NAV_LINKS = [
-  { label: 'Model Inspect', href: '/' }
+  { label: 'Model Inspect', href: ROUTE.HOME },
+  { label: 'WebGPU', href: ROUTE.WEB_GPU }
   // { label: 'Model Movement', href: '/model-movement' },
   // { label: 'Manipulator Simulation', href: '/manipulator-simulation' }
 ];
