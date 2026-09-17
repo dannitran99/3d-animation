@@ -3,3 +3,8 @@ export type TGalleryModel = Readonly<{
   name: string;
   url: string;
 }>;
+
+export type TWebGPUDemo = Readonly<{
+  id: string;
+  name: string;
+}>;

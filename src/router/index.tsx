@@ -1,17 +1,23 @@
 import { MainLayout } from '@layouts';
-import { HomePage, NotFoundPage } from '@pages';
+import { HomePage, NotFoundPage, WebGPU } from '@pages';
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import { ROUTE } from '@/constants/router';
+
 const routes = createBrowserRouter([
   {
-    path: '/',
+    path: ROUTE.HOME,
     element: <MainLayout />, // Layout chung
     errorElement: <NotFoundPage />, // Trang lỗi chung cho các route con
     children: [
       {
         index: true, // Route mặc định của cha ('/')
         element: <HomePage />
+      },
+      {
+        path: ROUTE.WEB_GPU, // Route mặc định của cha ('/')
+        element: <WebGPU />
       }
     ]
   }
